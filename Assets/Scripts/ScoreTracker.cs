@@ -7,9 +7,19 @@ public class ScoreTracker : MonoBehaviour
 {
     public int Score = 0;
 
+    private void OnEnable()
+    {
+        ScoreConsumable.OnScoreConsumableConsumed += IncreaseScore; // Increase score when score consumable is consumed :DD
+    }
+
+    private void OnDisable()
+    {
+        ScoreConsumable.OnScoreConsumableConsumed -= IncreaseScore;
+    }
+
     private void Start()
     {
-        Score = 0; // Reset score on game start & on reset (Reset reloads scene, thus Start() is called again)
+        ResetScore(); // Reset score on game start & on restart (Reset reloads scene, thus Start() is called again)
     }
 
     void IncreaseScore()
