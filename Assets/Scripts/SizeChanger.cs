@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 /// <summary>
@@ -11,14 +10,29 @@ public class SizeChanger : MonoBehaviour
 
     public float ScaleChangePerSecond = 0.1f;
 
-    public float directionMultiplier;
+    [Tooltip("If true, object will start with a random scale between big and small. useful for creating randomness between similar objects")]
+    public bool StartWithRandomScale = true;
+
+    private void Start()
+    {
+        // Start with random scale 
+        if (StartWithRandomScale)
+        {
+            float randomScale = UnityEngine.Random.Range(ScaleSmall, ScaleBig);
+            transform.localScale = new Vector3(
+            randomScale,
+            randomScale,
+            randomScale
+            );
+        }
+    }
 
     private void Update()
     {
         // Decide which way to scale
-        directionMultiplier = GetScaleDirectionMultiplier();
+        float directionMultiplier = GetScaleDirectionMultiplier();
 
-        // Sync to framerate & modify with direction
+        // Sync to framerate & modify with wanted direction
         float actualScaleChange = ScaleChangePerSecond * Time.deltaTime * directionMultiplier;
 
         // Modify size
@@ -29,10 +43,10 @@ public class SizeChanger : MonoBehaviour
         );
     }
 
+    float directionMultiplierLastFrame = 1f;
     /// <summary>
     /// Returns which way scaling should happen
     /// </summary>
-    float directionMultiplierLastFrame = 1f;
     float GetScaleDirectionMultiplier()
     {
         if (transform.localScale.x > ScaleBig)
@@ -50,6 +64,5 @@ public class SizeChanger : MonoBehaviour
             // Limits not reached, continue scaling same way as last frame
             return directionMultiplierLastFrame;
         }
-
     }
 }
