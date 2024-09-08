@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -5,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public class DeathHandler : MonoBehaviour
 {
+    public static Action OnPlayerDied;
+
     // Reacts to different events which might cause death & does death stuff
     private void OnEnable()
     {
@@ -18,14 +21,15 @@ public class DeathHandler : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("Died");
-
         // disable movement
         GetComponent<Rigidbody2D>().isKinematic = true;
         GetComponent<PlayerMovementController>().enabled = false;
 
         // Disable visual 
         GetComponent<SpriteRenderer>().enabled = false;
+
+        Debug.Log("died");
+        OnPlayerDied?.Invoke();
     }
 
     // Cause death when player goes below camera height
