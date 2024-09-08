@@ -9,15 +9,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInput.OnJumpTriggered += AddPendingJump;
+        PlayerInput.OnJumpTriggered += Jump; // Sub to input events
     }
 
     private void OnDisable()
     {
-        PlayerInput.OnJumpTriggered -= AddPendingJump;
+        PlayerInput.OnJumpTriggered -= Jump;// Unsub from input events
     }
 
-    void AddPendingJump()
+    // Input events might not happen at the same time as fixedUpdate which is used to control physics movement. 
+    // Because of this we need to wait for jumps to be "consumed" in fixedupdate
+    void Jump()
     {
         JumpPending = true;
     }
