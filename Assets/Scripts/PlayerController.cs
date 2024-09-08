@@ -1,6 +1,8 @@
 using UnityEngine;
-
-public class PlayerController : MonoBehaviour
+/// <summary>
+/// Controls player movement
+/// </summary>
+public class PlayerMovementController : MonoBehaviour
 {
     public Rigidbody2D PlayerRigidBody;
     public float JumpForce = 10f;
