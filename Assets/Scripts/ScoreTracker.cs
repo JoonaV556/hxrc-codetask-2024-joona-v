@@ -22,7 +22,7 @@ public class ScoreTracker : MonoBehaviour
         ResetScore(); // Reset score on game start & on restart (Reset reloads scene, thus Start() is called again)
     }
 
-    void IncreaseScore()
+    void IncreaseScore(ConsumeInfo consumeInfo)
     {
         Score++;
         Debug.Log($"Score increased. Score: {Score}");
