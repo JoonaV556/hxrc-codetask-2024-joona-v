@@ -13,7 +13,6 @@ public class ColorChangerConsumable : ConsumableBase
         if (other.TryGetComponent(out PlayerColorAgent agent))
         {
             agent.NextColor();
-            Debug.Log("switching player color");
             OnColorChangerConsumed?.Invoke();
             Destroy(gameObject);
         }

@@ -240,6 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 20207142}
   - component: {fileID: 20207143}
+  - component: {fileID: 20207144}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -280,6 +281,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpinSpeed: 50
   RandomizeDirection: 1
+--- !u!114 &20207144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20207141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66e9b21bb84ca64fa8c8428e8a3732e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &100007471
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,6 +2133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1200462902}
   - component: {fileID: 1200462903}
+  - component: {fileID: 1200462904}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -2159,6 +2173,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpinSpeed: 50
   RandomizeDirection: 1
+--- !u!114 &1200462904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200462901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66e9b21bb84ca64fa8c8428e8a3732e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1216704787
 GameObject:
   m_ObjectHideFlags: 0
@@ -2883,6 +2909,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1865199489}
+  - component: {fileID: 1865199490}
+  - component: {fileID: 1865199491}
   m_Layer: 0
   m_Name: Cross
   m_TagString: Untagged
@@ -2909,6 +2937,32 @@ Transform:
   - {fileID: 1196426974}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1865199490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865199488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66e9b21bb84ca64fa8c8428e8a3732e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1865199491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865199488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b025e1aabddb1f741864d903515b9929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpinSpeed: 50
+  RandomizeDirection: 1
 --- !u!1 &1948708992
 GameObject:
   m_ObjectHideFlags: 0

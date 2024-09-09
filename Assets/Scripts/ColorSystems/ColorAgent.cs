@@ -33,10 +33,13 @@ public class ColorAgent : MonoBehaviour
     /// </summary>
     public void NextColor()
     {
-        Debug.Log("SWitching color to next one");
         SetColor(GetNextColor(Color));
     }
 
+    /// <summary>
+    /// Sets object color to given one
+    /// </summary>
+    /// <param name="key"></param>
     public void SetColor(ColorKey key)
     {
         Color colorValue = GetColorValue(key);
