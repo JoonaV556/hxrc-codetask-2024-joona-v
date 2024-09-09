@@ -52,6 +52,21 @@ public class ColorDataBase : MonoBehaviour
         return (ColorKey)Random.Range(0, 3);
     }
 
+    /// <summary>
+    /// Returns next color in game colors
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public static ColorKey GetNextColor(ColorKey key)
+    {
+        int nextIndex = (int)key + 1;
+        if (nextIndex > 3) // if next is out of bounds, switch to first one
+        {
+            nextIndex = 0;
+        }
+        return (ColorKey)nextIndex;
+    }
+
     // Override hardcoded colors with inspector defined ones (created with fancy picker :))
     private void Awake()
     {

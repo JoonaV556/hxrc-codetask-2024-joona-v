@@ -34,12 +34,7 @@ public class ColorAgent : MonoBehaviour
     public void NextColor()
     {
         Debug.Log("SWitching color to next one");
-        int nextIndex = (int)Color + 1;
-        if (nextIndex > 3) // if next is out of bounds, switch to first one
-        {
-            nextIndex = 0;
-        }
-        SetColor((ColorKey)nextIndex);
+        SetColor(GetNextColor(Color));
     }
 
     public void SetColor(ColorKey key)
