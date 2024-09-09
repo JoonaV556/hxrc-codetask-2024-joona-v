@@ -8,16 +8,20 @@ public class DeathHandler : MonoBehaviour
 {
     public static Action OnPlayerDied;
 
-    // Reacts to different events which might cause death & does death stuff
+    // sub to various game events
     private void OnEnable()
     {
         // Die when player hits wrong color
         PlayerColorAgent.OnCollidedWithWrongColorEvent += Die;
+        // Die when player falls below lower camera edge
+        OutOfScreenHandler.OnPlayerFellBelowCamera += Die;
     }
 
+    // Unsub from events
     private void OnDisable()
     {
         PlayerColorAgent.OnCollidedWithWrongColorEvent -= Die;
+        OutOfScreenHandler.OnPlayerFellBelowCamera -= Die;
     }
 
     public void Die()
@@ -33,15 +37,5 @@ public class DeathHandler : MonoBehaviour
 
         Debug.Log("died");
         OnPlayerDied?.Invoke();
-    }
-
-    // Cause death when player goes below camera height
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("CameraBottom")) // Camera has a child collider attached to bottom of screen, which has the CameraBottom tag
-        {
-            Debug.Log("Hit camera bottom");
-            Die();
-        }
     }
 }
