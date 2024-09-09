@@ -1,14 +1,21 @@
 using UnityEngine;
 using static ColorDataBase;
 
+/// <summary>
+/// Handles color comparisons for various 2d objects
+/// </summary>
 public class ColorAgent : MonoBehaviour
 {
-    public ColorKey CurrentColor;
+    public bool RandomizeColorAtStart = true;
+
+    [HideInInspector]
+    public ColorKey Color;
 
     // Randomizes color of object when Start() is called
     private void Start()
     {
-        RandomizeColor();
+        if (RandomizeColorAtStart)
+            RandomizeColor();
     }
 
     /// <summary>
@@ -25,7 +32,7 @@ public class ColorAgent : MonoBehaviour
     {
         Color colorValue = GetColorValue(key);
         // Update component color - used for comparisons between objects
-        CurrentColor = key;
+        Color = key;
         // Update sprite color
         GetComponent<SpriteRenderer>().color = colorValue;
     }
