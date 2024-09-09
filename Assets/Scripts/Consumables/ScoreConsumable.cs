@@ -10,7 +10,7 @@ public class ScoreConsumable : ConsumableBase
     /// Fired when score consumable (star) is consumed. Vector2 is for star location at the moment of consuming (useful for visual stuff etc)
     /// </summary>
     public static Action<ConsumeInfo> OnScoreConsumableConsumed; // :DD
-    protected override void OnConsumed()
+    protected override void OnConsumed(Collider2D other)
     {
         Debug.Log("Score consumed!");
 

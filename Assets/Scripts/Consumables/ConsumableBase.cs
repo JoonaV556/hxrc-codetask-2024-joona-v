@@ -7,10 +7,10 @@ public class ConsumableBase : MonoBehaviour
 {
     public void OnTriggerEnter2D(Collider2D other)
     {
-        OnConsumed();
+        OnConsumed(other);
     }
 
-    protected virtual void OnConsumed()
+    protected virtual void OnConsumed(Collider2D other)
     {
         Debug.Log("I got consumed!");
     }
