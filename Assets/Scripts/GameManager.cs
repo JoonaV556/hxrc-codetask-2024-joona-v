@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
         Playing,
         GameOver
     }
+
+    public static Action OnGameOver;
 
     GameState CurrentState = GameState.Playing;
 
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour
     void EndGame()
     {
         CurrentState = GameState.GameOver;
+        OnGameOver?.Invoke();
     }
 
     // Allow restart only when game is over

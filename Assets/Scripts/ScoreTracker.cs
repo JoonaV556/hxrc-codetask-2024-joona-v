@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -6,6 +7,11 @@ using UnityEngine;
 public class ScoreTracker : MonoBehaviour
 {
     public int Score = 0;
+
+    /// <summary>
+    /// int for new score after increase
+    /// </summary>
+    public static Action<int> OnScoreIncreased;
 
     private void OnEnable()
     {
@@ -25,6 +31,7 @@ public class ScoreTracker : MonoBehaviour
     void IncreaseScore(ConsumeInfo consumeInfo)
     {
         Score++;
+        OnScoreIncreased?.Invoke(Score);
         Debug.Log($"Score increased. Score: {Score}");
     }
 
