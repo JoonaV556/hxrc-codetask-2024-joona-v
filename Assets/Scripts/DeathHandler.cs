@@ -8,7 +8,8 @@ public class DeathHandler : MonoBehaviour
 {
     public static Action OnPlayerDied;
 
-    // sub to various game events
+    // sub to various game events - Utilizing events to tie up game logic is more scalable than establishing hard references between components.
+    // Refactoring is easier & less spaghetti
     private void OnEnable()
     {
         // Die when player hits wrong color
