@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         PlayerInput.OnResetTriggered -= OnResetTriggered;
     }
 
-    void EndGame()
+    void EndGame(DeathHandler.DeathInfo info)
     {
         CurrentState = GameState.GameOver;
         OnGameOver?.Invoke();

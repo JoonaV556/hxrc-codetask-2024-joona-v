@@ -6,7 +6,12 @@ using UnityEngine;
 /// </summary>
 public class DeathHandler : MonoBehaviour
 {
-    public static Action OnPlayerDied;
+    public struct DeathInfo
+    {
+        public Vector2 position;
+    }
+
+    public static Action<DeathInfo> OnPlayerDied;
 
     // sub to various game events - Utilizing events to tie up game logic is more scalable than establishing hard references between components.
     // Refactoring is easier & less spaghetti
@@ -37,6 +42,11 @@ public class DeathHandler : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
 
         Debug.Log("died");
-        OnPlayerDied?.Invoke();
+        OnPlayerDied?.Invoke(
+            new DeathInfo
+            {
+                position = transform.position,
+            }
+        );
     }
 }
