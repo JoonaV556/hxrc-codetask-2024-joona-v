@@ -15,13 +15,15 @@ public class ColorGroupController : MonoBehaviour
 
     List<ColorAgent> Agents;
 
+    private void Awake()
+    {
+        PlayerColorAgent.OnPlayerColorSwitched += OnPlayerColorSwitched; // Randomize color at start
+    }
+
     private void OnEnable()
     {
         // Get agents in children
         Agents = GetComponentsInChildren<ColorAgent>().ToList();
-
-        // Switch child colors when player color changes
-        PlayerColorAgent.OnPlayerColorSwitched += OnPlayerColorSwitched;
     }
 
     private void OnDisable()

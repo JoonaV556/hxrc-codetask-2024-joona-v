@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\ColorSystems\ColorAgent.cs" />
+    <Compile Include="Assets\Scripts\ObjectSpawner.cs" />
     <Compile Include="Assets\Scripts\ColorSystems\PlayerColorAgent.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ParticleKiller.cs" />
