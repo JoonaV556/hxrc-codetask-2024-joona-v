@@ -9,12 +9,16 @@ public static class ColorDataBase
 {
     public enum ColorKey
     {
-        Yellow,
-        Red,
-        Green,
-        Blue
+        Yellow = 0,
+        Red = 1,
+        Green = 2,
+        Blue = 3
     }
 
+    /// <summary>
+    /// Dictionary of possible color keys and their respective rgb value
+    /// </summary>
+    /// <returns></returns>
     public static readonly Dictionary<ColorDataBase.ColorKey, Color> GameColors = new()
     {
         { ColorKey.Yellow, Color.yellow },
@@ -23,18 +27,16 @@ public static class ColorDataBase
         { ColorKey.Blue, Color.blue }
     };
 
-    public static Color GetColor(ColorKey key)
+    public static Color GetColorValue(ColorKey key)
     {
         return GameColors[key];
     }
-}
 
-public class ColorRandomizer : MonoBehaviour
-{
-    // Randomizes color of object when Start() is called
-
-    private void Start()
+    /// <summary>
+    /// Returns random color key from possible color keys.
+    /// </summary>
+    public static ColorKey GetRandomKey()
     {
-        /// Color.
+        return (ColorKey)Random.Range(0, 3);
     }
 }
