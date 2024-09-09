@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 /// <summary>
 /// Controls player movement
 /// </summary>
 public class PlayerMovementController : MonoBehaviour
 {
+    public static Action OnJumpedEvent;
+
     public Rigidbody2D PlayerRigidBody;
     public float JumpForce = 10f;
     public float MaxVelocity = 5f;
@@ -34,6 +37,7 @@ public class PlayerMovementController : MonoBehaviour
             // Calculate jump force
             Vector2 Force = transform.up.normalized * JumpForce;
             PlayerRigidBody.AddForce(Force, ForceMode2D.Impulse);
+            OnJumpedEvent?.Invoke();
             JumpPending = false;
         }
 

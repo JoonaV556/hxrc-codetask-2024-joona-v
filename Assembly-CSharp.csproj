@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Consumables\ColorRandomizerConsumable.cs" />
     <Compile Include="Assets\Scripts\ColorSystems\ObstacleColorAgent.cs" />
     <Compile Include="Assets\Scripts\DeathHandler.cs" />
+    <Compile Include="Assets\Scripts\SFXManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
