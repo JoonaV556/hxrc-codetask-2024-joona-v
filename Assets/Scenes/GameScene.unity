@@ -280,9 +280,8 @@ MonoBehaviour:
   - {fileID: 2280188921369673810, guid: 42c265e70f0e1964e886177ae948ca27, type: 3}
   Star: {fileID: 2238744031703837599, guid: 15fb773006ccc5b4097027e18f683c53, type: 3}
   ColorChanger: {fileID: 6805261179992974854, guid: 6508b11ee7e1e004aa83c979a5715b60, type: 3}
-  DistanceBetweenSpawnedObjects: 8
-  PlayerMoveUpTreshold: 8
-  PlayerTransform: {fileID: 698958932}
+  DistanceBetweenSpawnedObjects: 12
+  ObjectsSpawnedOnGameStart: 4
 --- !u!1 &151207173
 GameObject:
   m_ObjectHideFlags: 0

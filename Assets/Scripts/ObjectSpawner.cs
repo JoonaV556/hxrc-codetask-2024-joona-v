@@ -1,8 +1,14 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
+    /*
+        Spawns x amount of objects above player when game starts
+        Each time player exceeds height of spawned object, new object is spawned
+    */
+
     [Header("Spawnables")]
     public GameObject[] ObstaclePool; // Scalable pool for various kinds of obstacles
     public GameObject Star;
@@ -11,8 +17,7 @@ public class ObjectSpawner : MonoBehaviour
     [Space(20)]
     [Header("Params")]
     public float DistanceBetweenSpawnedObjects = 8f; // distance between each spawned object
-    public float PlayerMoveUpTreshold = 8f; // how much player has to move up to trigger new spawn wave
-    public Transform PlayerTransform;
+    public int ObjectsSpawnedOnGameStart = 4;
 
     float lastSpawnY = 0f;
     SpawnableType lastSpawnedType = SpawnableType.none;
@@ -27,21 +32,45 @@ public class ObjectSpawner : MonoBehaviour
 
     private void Start()
     {
-        // Spawn first object above player
-        SpawnNextObject();
+        // Spawn x amount of objects above player at start
+        // Always spawn star first
+        for (int i = 0; i < ObjectsSpawnedOnGameStart; i++)
+        {
+            if (i == 0)
+            {
+                SpawnNextObject(SpawnableType.Star);
+                continue;
+            }
+            SpawnNextObject();
+        }
     }
 
-    void SpawnNextObject()
+    /// <summary>
+    /// Spawns next object.
+    /// If override is not given, spawns random object.
+    /// </summary>
+    /// <param name="typeOverride"></param>
+    void SpawnNextObject(SpawnableType typeOverride = SpawnableType.none)
     {
         // Get next object
-        GameObject obj = GetRandomObject();
+        GameObject obj;
+        if (typeOverride == SpawnableType.none)
+        {
+            obj = GetRandomObject(); // if override not given, get random object
+        }
+        else
+        {
+            obj = GetObject(typeOverride); // Return object with override type
+        }
 
         // Place object certain distance above last object
+        float spawnHeight = lastSpawnY + DistanceBetweenSpawnedObjects;
         obj.GetComponent<Transform>().localPosition = new Vector3(
             0f,
-            lastSpawnY + DistanceBetweenSpawnedObjects,
+            spawnHeight,
             0f
         );
+        lastSpawnY = spawnHeight;
     }
 
     /// <summary>
@@ -53,8 +82,20 @@ public class ObjectSpawner : MonoBehaviour
         // decide which type of object to spawn
         SpawnableType type = GetRandomType();
 
-        GameObject obj = null;
+        GameObject obj = GetObject(type);
 
+        return obj;
+    }
+
+    /// <summary>
+    /// Returns object based on given type.
+    /// If type is obstacle, returns randomized obstacle
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    GameObject GetObject(SpawnableType type)
+    {
+        GameObject obj = null;
         switch (type)
         {
             case SpawnableType.Obstacle:
@@ -70,7 +111,6 @@ public class ObjectSpawner : MonoBehaviour
                 obj = null; // GetRandomType wont return none
                 break;
         }
-
         return obj;
     }
 
@@ -85,11 +125,11 @@ public class ObjectSpawner : MonoBehaviour
         int random;
         if (lastSpawnedType == SpawnableType.ColorChanger)
         {
-            random = Random.Range(0, 1); // prevent two color changers in row
+            random = UnityEngine.Random.Range(0, 2); // exclude color changer
         }
         else
         {
-            random = Random.Range(0, 2);
+            random = UnityEngine.Random.Range(0, 3); // any type of object
         }
         return (SpawnableType)random;
     }
@@ -97,7 +137,7 @@ public class ObjectSpawner : MonoBehaviour
     GameObject GetRandomObstacle()
     {
         int obstacleCount = ObstaclePool.Count();
-        int random = Random.Range(0, obstacleCount - 1);
+        int random = UnityEngine.Random.Range(0, obstacleCount - 1);
         return Instantiate(ObstaclePool[random]);
     }
 }
