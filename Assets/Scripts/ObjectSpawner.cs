@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Burst;
 using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
@@ -34,6 +32,7 @@ public class ObjectSpawner : MonoBehaviour
     }
 
     #region SpawnMemory
+
     // Stores lastly spawned objects in memory
     // Required for:
     //  Tracking when new objects should be spawned
@@ -55,6 +54,7 @@ public class ObjectSpawner : MonoBehaviour
         }
         SpawnedObjectMemory.Add(new KeyValuePair<float, SpawnableType>(spawnHeight, type));
     }
+
     #endregion
 
     /// <summary>

@@ -41,6 +41,9 @@ public class DeathHandler : MonoBehaviour
         // Disable visual 
         GetComponent<SpriteRenderer>().enabled = false;
 
+        // disable collision to prevent deathloop
+        GetComponent<CircleCollider2D>().enabled = false;
+
         Debug.Log("died");
         OnPlayerDied?.Invoke(
             new DeathInfo
