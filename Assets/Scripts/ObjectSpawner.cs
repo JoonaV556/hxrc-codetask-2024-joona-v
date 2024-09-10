@@ -7,6 +7,9 @@ public class ObjectSpawner : MonoBehaviour
     /*
         Spawns x amount of objects above player when game starts
         Each time player exceeds height of spawned object, new object is spawned
+
+        prevents two stars in row
+        prevents two color changers in row
     */
 
     [Header("Spawnables")]
@@ -139,6 +142,9 @@ public class ObjectSpawner : MonoBehaviour
         // Track spawn height
         lastSpawnY = spawnHeight;
 
+        // Track object type
+        lastSpawnedType = objectToSpawn.Value;
+
         // Add spawned object to memory
         AddToMemory(spawnHeight, objectToSpawn.Value);
     }
@@ -191,15 +197,30 @@ public class ObjectSpawner : MonoBehaviour
     /// <returns></returns>
     SpawnableType GetRandomType()
     {
-        // get random int in possible object types
+        // Always spawn atleast 1 obstacle between each 3 spawns
+        bool obstacleSpawned = false;
+        foreach (var spawnedObject in SpawnedObjectMemory)
+        {
+            if (spawnedObject.Value == SpawnableType.Obstacle)
+            {
+                obstacleSpawned = true;
+                break;
+            }
+        }
+        if (!obstacleSpawned)
+        {
+            return SpawnableType.Obstacle;
+        }
+
         int random;
+        // Prevent two color changers in row
         if (lastSpawnedType == SpawnableType.ColorChanger)
         {
-            random = UnityEngine.Random.Range(0, 2); // exclude color changer
+            random = UnityEngine.Random.Range(0, 2);
         }
         else
         {
-            random = UnityEngine.Random.Range(0, 3); // any type of object
+            random = UnityEngine.Random.Range(0, 3);
         }
         return (SpawnableType)random;
     }
