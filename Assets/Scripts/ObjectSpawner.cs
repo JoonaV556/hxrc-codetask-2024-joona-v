@@ -63,12 +63,27 @@ public class ObjectSpawner : MonoBehaviour
     /// <returns>returns true</returns>
     bool ShouldSpawnNextObject()
     {
+        // Return if no objects spawned yet 
+        if (SpawnedObjectMemory == null || SpawnedObjectMemory.Count() == 0)
+        {
+            return false;
+        }
+
         float playerHeight = PlayerTransform.position.y;
-        if (playerHeight > SpawnedObjectMemory[0].Key)
+        if (playerHeight > SpawnedObjectMemory[0].Key) // Last object in memory is the first member on in the list, newest one is the last member
         {
             return true;
         }
         return false;
+    }
+
+    private void Update()
+    {
+        // Spawn next object when player height exceeds height of last spawned in the memory 
+        if (ShouldSpawnNextObject())
+        {
+            SpawnNextObject();
+        }
     }
 
     private void Start()
@@ -97,16 +112,16 @@ public class ObjectSpawner : MonoBehaviour
     /// <param name="typeOverride"></param>
     void SpawnNextObject(SpawnableType typeOverride = SpawnableType.none)
     {
-        // Get next object
         KeyValuePair<GameObject, SpawnableType> objectToSpawn;
 
+        // Get next object
         if (typeOverride == SpawnableType.none)
         {
             objectToSpawn = GetRandomObject(); // if override not given, get random object
         }
         else
         {
-            // get specific type of object
+            // override set, get specific type of object
             objectToSpawn = new KeyValuePair<GameObject, SpawnableType>(
                 GetSpawnableObject(typeOverride),
                 typeOverride
