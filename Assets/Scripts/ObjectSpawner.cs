@@ -33,6 +33,7 @@ public class ObjectSpawner : MonoBehaviour
         none = 3,
     }
 
+    #region SpawnMemory
     // Stores lastly spawned objects in memory
     // Required for:
     //  Tracking when new objects should be spawned
@@ -41,22 +42,20 @@ public class ObjectSpawner : MonoBehaviour
     int memoryLength; // How many objects are stored in memory
 
     /// <summary>
-    /// Adds new object to memory (last in list)
+    /// Adds new object to memory and automatically removes the last one if adding exceeds memory limit
     /// </summary>
     /// <param name="spawnHeight"></param>
     /// <param name="type"></param>
     void AddToMemory(float spawnHeight, SpawnableType type)
     {
+        // Remove last object if exceeding limit 
+        if (SpawnedObjectMemory.Count() == memoryLength)
+        {
+            SpawnedObjectMemory.Remove(SpawnedObjectMemory[0]);
+        }
         SpawnedObjectMemory.Add(new KeyValuePair<float, SpawnableType>(spawnHeight, type));
     }
-
-    /// <summary>
-    /// Removes oldest object in memory (first in list)
-    /// </summary>
-    void RemoveLastInMemory()
-    {
-        SpawnedObjectMemory.Remove(SpawnedObjectMemory[0]);
-    }
+    #endregion
 
     /// <summary>
     /// Checks if player has jumped above last object in memory
@@ -74,9 +73,9 @@ public class ObjectSpawner : MonoBehaviour
 
     private void Start()
     {
-        // Init spawned object memory 
-        // memoryLength =
-
+        // init memory
+        memoryLength = ObjectsSpawnedOnGameStart;
+        SpawnedObjectMemory = new();
 
         // Spawn x amount of objects above player at start
         // Always spawn star first
@@ -99,38 +98,48 @@ public class ObjectSpawner : MonoBehaviour
     void SpawnNextObject(SpawnableType typeOverride = SpawnableType.none)
     {
         // Get next object
-        GameObject obj;
+        KeyValuePair<GameObject, SpawnableType> objectToSpawn;
+
         if (typeOverride == SpawnableType.none)
         {
-            obj = GetRandomObject(); // if override not given, get random object
+            objectToSpawn = GetRandomObject(); // if override not given, get random object
         }
         else
         {
-            obj = GetObject(typeOverride); // Return object with override type
+            // get specific type of object
+            objectToSpawn = new KeyValuePair<GameObject, SpawnableType>(
+                GetSpawnableObject(typeOverride),
+                typeOverride
+                );
         }
 
         // Place object certain distance above last object
         float spawnHeight = lastSpawnY + DistanceBetweenSpawnedObjects;
-        obj.GetComponent<Transform>().localPosition = new Vector3(
+        objectToSpawn.Key.GetComponent<Transform>().localPosition = new Vector3(
             0f,
             spawnHeight,
             0f
         );
+
+        // Track spawn height
         lastSpawnY = spawnHeight;
+
+        // Add spawned object to memory
+        AddToMemory(spawnHeight, objectToSpawn.Value);
     }
 
     /// <summary>
     /// instantiates and returns random object from object pool
     /// </summary>
     /// <returns></returns>
-    GameObject GetRandomObject()
+    KeyValuePair<GameObject, SpawnableType> GetRandomObject()
     {
         // decide which type of object to spawn
         SpawnableType type = GetRandomType();
 
-        GameObject obj = GetObject(type);
+        GameObject obj = GetSpawnableObject(type);
 
-        return obj;
+        return new KeyValuePair<GameObject, SpawnableType>(obj, type);
     }
 
     /// <summary>
@@ -139,7 +148,7 @@ public class ObjectSpawner : MonoBehaviour
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    GameObject GetObject(SpawnableType type)
+    GameObject GetSpawnableObject(SpawnableType type)
     {
         GameObject obj = null;
         switch (type)
