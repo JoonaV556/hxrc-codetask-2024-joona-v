@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst;
 using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
@@ -18,6 +20,7 @@ public class ObjectSpawner : MonoBehaviour
     [Header("Params")]
     public float DistanceBetweenSpawnedObjects = 8f; // distance between each spawned object
     public int ObjectsSpawnedOnGameStart = 4;
+    public Transform PlayerTransform; // Required for tracking when new objects must be spawned
 
     float lastSpawnY = 0f;
     SpawnableType lastSpawnedType = SpawnableType.none;
@@ -30,8 +33,51 @@ public class ObjectSpawner : MonoBehaviour
         none = 3,
     }
 
+    // Stores lastly spawned objects in memory
+    // Required for:
+    //  Tracking when new objects should be spawned
+    //  Establishing specific spawning rules (prevent multiple color changers in row etc.)
+    List<KeyValuePair<float, SpawnableType>> SpawnedObjectMemory;
+    int memoryLength; // How many objects are stored in memory
+
+    /// <summary>
+    /// Adds new object to memory (last in list)
+    /// </summary>
+    /// <param name="spawnHeight"></param>
+    /// <param name="type"></param>
+    void AddToMemory(float spawnHeight, SpawnableType type)
+    {
+        SpawnedObjectMemory.Add(new KeyValuePair<float, SpawnableType>(spawnHeight, type));
+    }
+
+    /// <summary>
+    /// Removes oldest object in memory (first in list)
+    /// </summary>
+    void RemoveLastInMemory()
+    {
+        SpawnedObjectMemory.Remove(SpawnedObjectMemory[0]);
+    }
+
+    /// <summary>
+    /// Checks if player has jumped above last object in memory
+    /// </summary>
+    /// <returns>returns true</returns>
+    bool ShouldSpawnNextObject()
+    {
+        float playerHeight = PlayerTransform.position.y;
+        if (playerHeight > SpawnedObjectMemory[0].Key)
+        {
+            return true;
+        }
+        return false;
+    }
+
     private void Start()
     {
+        // Init spawned object memory 
+        // memoryLength =
+
+
         // Spawn x amount of objects above player at start
         // Always spawn star first
         for (int i = 0; i < ObjectsSpawnedOnGameStart; i++)
