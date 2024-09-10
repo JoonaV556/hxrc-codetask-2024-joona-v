@@ -191,38 +191,81 @@ public class ObjectSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// returns random object type
-    /// does not return two color changers in row
+    /// returns random object type w/ some custom rules. this is the heart of the spawner alglorithm
     /// </summary>
     /// <returns></returns>
     SpawnableType GetRandomType()
     {
         // Always spawn atleast 1 obstacle between each 3 spawns
-        bool obstacleSpawned = false;
+        bool obstacleSpawnedInLastThree = false;
         foreach (var spawnedObject in SpawnedObjectMemory)
         {
             if (spawnedObject.Value == SpawnableType.Obstacle)
             {
-                obstacleSpawned = true;
-                break;
+                obstacleSpawnedInLastThree = true;
+
             }
         }
-        if (!obstacleSpawned)
+        if (!obstacleSpawnedInLastThree)
         {
             return SpawnableType.Obstacle;
         }
 
-        int random;
-        // Prevent two color changers in row
+        // filter out certain objects with some prevention rules 
+        List<int> possibleTypes = new List<int>
+        {
+            0,
+            1,
+            2
+        };
+
+        // prevent two color changers in row
         if (lastSpawnedType == SpawnableType.ColorChanger)
         {
-            random = UnityEngine.Random.Range(0, 2);
+            possibleTypes.Remove(2); // Remove color changer
         }
-        else
+
+        // Prevent 3 obstacles in row
+        if (WereLastTwoObstacles())
         {
-            random = UnityEngine.Random.Range(0, 3);
+            possibleTypes.Remove(0); // remove obstacle
         }
-        return (SpawnableType)random;
+
+        // return random type after unwanted types have been excluded
+        return (SpawnableType)GetRandomInt(possibleTypes);
+    }
+
+    /// <summary>
+    /// Returns random member from list of ints
+    /// </summary>
+    /// <param name="list"></param>
+    /// <returns></returns>
+    int GetRandomInt(List<int> list)
+    {
+        if (list.Count() == 1)
+        {
+            return list[0];
+        }
+        int random = UnityEngine.Random.Range(0, list.Count() - 1);
+        return list[random];
+    }
+
+    bool WereLastTwoObstacles()
+    {
+        if (SpawnedObjectMemory == null || SpawnedObjectMemory.Count() < 2)
+        {
+            return false;
+        }
+        int obstacles = 0;
+        int lastIndex = SpawnedObjectMemory.Count() - 1;
+        for (int i = lastIndex; i > lastIndex - 2; i--)
+        {
+            if (SpawnedObjectMemory[i].Value == SpawnableType.Obstacle)
+            {
+                obstacles++;
+            }
+        }
+        return obstacles >= 2;
     }
 
     GameObject GetRandomObstacle()
