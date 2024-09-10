@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b2d641ab739ed47b86fc6a6eb7b842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomizeColorAtStart: 1
+  RandomizeColorAtStart: 0
   Color: 0
 --- !u!1 &6643452557601469271
 GameObject:
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b2d641ab739ed47b86fc6a6eb7b842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomizeColorAtStart: 1
+  RandomizeColorAtStart: 0
   Color: 0
 --- !u!1 &7449172231126512933
 GameObject:
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b2d641ab739ed47b86fc6a6eb7b842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomizeColorAtStart: 1
+  RandomizeColorAtStart: 0
   Color: 0
 --- !u!1 &7489988942870617179
 GameObject:
@@ -721,5 +721,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b2d641ab739ed47b86fc6a6eb7b842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomizeColorAtStart: 1
+  RandomizeColorAtStart: 0
   Color: 0

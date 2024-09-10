@@ -75,8 +75,8 @@
     <Compile Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.4\Editor\PSDPlugin\PsdFile\RleWriter.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.4\Editor\PSDPlugin\PsdFile\Layers\LayerInfo\InfoLayers.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.4\Editor\PSDPlugin\PDNWrapper\Rectangle.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.4\Editor\PSDPlugin\PsdFile\PsdFile.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.4\Editor\PSDPlugin\PsdFile\Compression\ZipImage.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.4\Editor\PSDPlugin\PsdFile\PsdFile.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.4\Editor\PSDPlugin\PsdFile\Compression\ZipPredict32Image.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.4\Editor\PSDPlugin\PsdFile\Layers\LayerInfo\RawLayerInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.4\Editor\PSDPlugin\PsdFile\Layers\Mask.cs" />

@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b2d641ab739ed47b86fc6a6eb7b842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomizeColorAtStart: 1
+  RandomizeColorAtStart: 0
   Color: 0
 --- !u!60 &5592328699888407838
 PolygonCollider2D:
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b2d641ab739ed47b86fc6a6eb7b842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomizeColorAtStart: 1
+  RandomizeColorAtStart: 0
   Color: 0
 --- !u!60 &8033240943612756541
 PolygonCollider2D:
@@ -536,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b2d641ab739ed47b86fc6a6eb7b842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomizeColorAtStart: 1
+  RandomizeColorAtStart: 0
   Color: 0
 --- !u!60 &6931210668432489587
 PolygonCollider2D:
@@ -818,7 +818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b2d641ab739ed47b86fc6a6eb7b842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomizeColorAtStart: 1
+  RandomizeColorAtStart: 0
   Color: 0
 --- !u!60 &5570329526992460041
 PolygonCollider2D:
