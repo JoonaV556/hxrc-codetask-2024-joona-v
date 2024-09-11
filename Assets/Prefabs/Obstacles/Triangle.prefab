@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1375573966676938972}
   - component: {fileID: 8310862004760254518}
   - component: {fileID: 3003352950779184298}
+  - component: {fileID: 2113420510591637108}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -76,6 +77,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExtraGap: 5
+--- !u!114 &2113420510591637108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2280188921369673810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26c967657ae69ac44b72a57f25271341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExtraSpeed: 10
 --- !u!1 &4778470266540310241
 GameObject:
   m_ObjectHideFlags: 0

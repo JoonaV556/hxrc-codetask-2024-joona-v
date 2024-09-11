@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4980073025511410788}
   - component: {fileID: 6051652282292449536}
   - component: {fileID: 3258040137209508880}
+  - component: {fileID: 3550533763915055853}
   m_Layer: 0
   m_Name: Cross
   m_TagString: Untagged
@@ -63,6 +64,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpinSpeed: 50
   RandomizeDirection: 1
+--- !u!114 &3550533763915055853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2949954104097668514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26c967657ae69ac44b72a57f25271341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExtraSpeed: 10
 --- !u!1 &4570464930085149311
 GameObject:
   m_ObjectHideFlags: 0
