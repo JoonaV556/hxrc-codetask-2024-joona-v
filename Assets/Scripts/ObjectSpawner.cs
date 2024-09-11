@@ -318,7 +318,7 @@ public class ObjectSpawner : MonoBehaviour
     GameObject GetRandomObstacle()
     {
         int obstacleCount = ObstaclePool.Count();
-        int random = UnityEngine.Random.Range(0, obstacleCount - 1);
+        int random = UnityEngine.Random.Range(0, obstacleCount);
         return Instantiate(ObstaclePool[random]);
     }
 }
