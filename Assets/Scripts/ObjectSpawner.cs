@@ -2,9 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Infinite spawner which spawns objects above player
+/// </summary>
 public class ObjectSpawner : MonoBehaviour
 {
     /*
+        Handles infinite spawning of objects in the game.
+        
         Spawns x amount of objects above player when game starts
         Each time player exceeds height of spawned object, new object is spawned
 
@@ -26,12 +31,13 @@ public class ObjectSpawner : MonoBehaviour
     float lastSpawnY = 0f;
     SpawnableType lastSpawnedType = SpawnableType.none;
 
+    // Each time new object is spawned, its type is selected using these possible types
     enum SpawnableType
     {
         Obstacle = 0,
         Star = 1,
         ColorChanger = 2,
-        none = 3,
+        none = 3, // none is only used as a default value for some properties at game start. Not actually used when spawning new obejcts
     }
 
     #region SpawnMemory
@@ -61,7 +67,7 @@ public class ObjectSpawner : MonoBehaviour
     #endregion
 
     /// <summary>
-    /// Checks if player has jumped above last object in memory
+    /// Checks if player has jumped above last object in memory.
     /// </summary>
     /// <returns>returns true</returns>
     bool ShouldSpawnNextObject()
@@ -91,17 +97,16 @@ public class ObjectSpawner : MonoBehaviour
 
     private void Start()
     {
-        // init memory
+        // init memory - we keep memory as long as obejcts spawned on game start
         memoryLength = ObjectsSpawnedOnGameStart;
         SpawnedObjectMemory = new();
 
         // Spawn x amount of objects above player at start
-        // Always spawn star first
         for (int i = 0; i < ObjectsSpawnedOnGameStart; i++)
         {
             if (i == 0)
             {
-                SpawnNextObject(SpawnableType.Star);
+                SpawnNextObject(SpawnableType.Star); // Always spawn star first
                 continue;
             }
             SpawnNextObject();
@@ -117,7 +122,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         KeyValuePair<GameObject, SpawnableType> objectToSpawn;
 
-        // Get next object
+        // Decide what type of object to spawn
         if (typeOverride == SpawnableType.none)
         {
             objectToSpawn = GetRandomObject(); // if override not given, get random object
@@ -131,7 +136,7 @@ public class ObjectSpawner : MonoBehaviour
                 );
         }
 
-        // Place object certain distance above last object
+        // Place object certain distance above last spawned object
         float spawnHeight = lastSpawnY + DistanceBetweenSpawnedObjects;
         objectToSpawn.Key.GetComponent<Transform>().localPosition = new Vector3(
             0f,
@@ -184,7 +189,7 @@ public class ObjectSpawner : MonoBehaviour
                 obj = Instantiate(ColorChanger);
                 break;
             case SpawnableType.none:
-                obj = null; // GetRandomType wont return none
+                obj = null; // not used when spawning new object, read comment at enum declaration
                 break;
         }
         return obj;
@@ -197,26 +202,19 @@ public class ObjectSpawner : MonoBehaviour
     SpawnableType GetRandomType()
     {
         // Always spawn atleast 1 obstacle between each 3 spawns
-        bool obstacleSpawnedInLastThree = false;
-        foreach (var spawnedObject in SpawnedObjectMemory)
-        {
-            if (spawnedObject.Value == SpawnableType.Obstacle)
-            {
-                obstacleSpawnedInLastThree = true;
-
-            }
-        }
-        if (!obstacleSpawnedInLastThree)
+        if (!ObstaclesSpawnedInLastThree())
         {
             return SpawnableType.Obstacle;
         }
 
+        // No need to spawn obstacle now, decide random type \/ \/
+
         // filter out certain objects with some prevention rules 
         List<int> possibleTypes = new List<int>
         {
-            0,
-            1,
-            2
+            0, // obstacle
+            1, // star 
+            2  // color changer
         };
 
         // prevent two color changers in row
@@ -237,6 +235,8 @@ public class ObjectSpawner : MonoBehaviour
         {
             types += type.ToString();
         }
+
+        // Cast randomized integer to SpawnableType - see enum declaration at top for details
         return (SpawnableType)GetRandomInt(possibleTypes);
     }
 
@@ -253,6 +253,24 @@ public class ObjectSpawner : MonoBehaviour
         }
         int random = UnityEngine.Random.Range(0, list.Count());
         return list[random];
+    }
+
+    /// <summary>
+    /// Checks whether any osbtacles were spawned during last three spawns
+    /// </summary>
+    /// <returns></returns>
+    bool ObstaclesSpawnedInLastThree()
+    {
+        bool obstacleSpawnedInLastThree = false;
+        foreach (var spawnedObject in SpawnedObjectMemory)
+        {
+            if (spawnedObject.Value == SpawnableType.Obstacle)
+            {
+                obstacleSpawnedInLastThree = true;
+
+            }
+        }
+        return obstacleSpawnedInLastThree;
     }
 
     bool WereLastTwoObstacles()

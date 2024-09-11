@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\OutOfScreenHandler.cs" />
     <Compile Include="Assets\Scripts\SizeChanger.cs" />
     <Compile Include="Assets\Scripts\Consumables\ScoreConsumable.cs" />
+    <Compile Include="Assets\Scripts\Controllers\PlayerMovementController.cs" />
     <Compile Include="Assets\Scripts\ScoreTracker.cs" />
     <Compile Include="Assets\Scripts\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Managers\ParticleManager.cs" />
@@ -77,15 +78,14 @@
     <Compile Include="Assets\Scripts\ColorSystems\ColorAgent.cs" />
     <Compile Include="Assets\Scripts\ObjectSpawner.cs" />
     <Compile Include="Assets\Scripts\ColorSystems\PlayerColorAgent.cs" />
-    <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ParticleKiller.cs" />
     <Compile Include="Assets\Scripts\Spinner.cs" />
     <Compile Include="Assets\Scripts\Consumables\ConsumableBase.cs" />
-    <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Consumables\ColorRandomizerConsumable.cs" />
     <Compile Include="Assets\Scripts\ColorSystems\ObstacleColorAgent.cs" />
     <Compile Include="Assets\Scripts\Managers\SFXManager.cs" />
     <Compile Include="Assets\Scripts\DeathHandler.cs" />
+    <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

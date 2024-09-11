@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Destroys spawned particlesystems
+/// Destroys spawned particlesystems after they are finished 
 /// </summary>
 public class ParticleKiller : MonoBehaviour
 {
