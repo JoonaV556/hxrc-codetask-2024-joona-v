@@ -1,4 +1,8 @@
 # hxrc-codetask-2024-joona-v
+
+Play on itchio:  
+https://coronal556.itch.io/2024-coding-task-joona-v  
+
 My fork of the minigame coding task  
   
 This is my version of the infinite ball jumper game.  
