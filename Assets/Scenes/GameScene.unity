@@ -240,6 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 146119772}
   - component: {fileID: 146119773}
+  - component: {fileID: 146119774}
   m_Layer: 0
   m_Name: ObjectSpawner
   m_TagString: Untagged
@@ -282,6 +283,20 @@ MonoBehaviour:
   ColorChanger: {fileID: 6805261179992974854, guid: 6508b11ee7e1e004aa83c979a5715b60, type: 3}
   DistanceBetweenSpawnedObjects: 16
   ObjectsSpawnedOnGameStart: 4
+  PlayerTransform: {fileID: 698958932}
+--- !u!114 &146119774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146119771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc874137602389148ae90c40bbe3579a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RemoveBelowPlayerDistanceTreshold: 20
   PlayerTransform: {fileID: 698958932}
 --- !u!1 &151207173
 GameObject:

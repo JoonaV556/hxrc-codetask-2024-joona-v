@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class ObjectSpawner : MonoBehaviour
 
         prevents two stars in row
         prevents two color changers in row
+
+
     */
 
     [Header("Spawnables")]
@@ -27,6 +30,11 @@ public class ObjectSpawner : MonoBehaviour
     public float DistanceBetweenSpawnedObjects = 8f; // distance between each spawned object
     public int ObjectsSpawnedOnGameStart = 4;
     public Transform PlayerTransform; // Required for tracking when new objects must be spawned
+
+    /// <summary>
+    /// Fired when obstacle is spawned - used for passing spawned objects for ObjectRemover to be removed once they are certain height below player
+    /// </summary>
+    public static Action<GameObject> OnObstacleSpawned;
 
     float lastSpawnY = 0f;
     SpawnableType lastSpawnedType = SpawnableType.none;
@@ -149,6 +157,12 @@ public class ObjectSpawner : MonoBehaviour
 
         // Track object type
         lastSpawnedType = objectToSpawn.Value;
+
+        // if object was obstacle - fire event
+        if (objectToSpawn.Value == SpawnableType.Obstacle)
+        {
+            OnObstacleSpawned?.Invoke(objectToSpawn.Key);
+        }
 
         // Add spawned object to memory
         AddToMemory(spawnHeight, objectToSpawn.Value);
