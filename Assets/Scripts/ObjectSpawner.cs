@@ -37,6 +37,7 @@ public class ObjectSpawner : MonoBehaviour
     public static Action<GameObject> OnObstacleSpawned;
 
     float lastSpawnY = 0f;
+    float lastObjectExtraDistance = 0f; // if last object had extra distance, this is used for the next object
     SpawnableType lastSpawnedType = SpawnableType.none;
 
     // Each time new object is spawned, its type is selected using these possible types
@@ -144,8 +145,17 @@ public class ObjectSpawner : MonoBehaviour
                 );
         }
 
+        // check if object has extra rules for spawning
+        float extraGap = 0f; // optional extra distance added between this and other objects
+        if (objectToSpawn.Key.TryGetComponent(out SpawnableExtraInfo info))
+        {
+            extraGap = info.ExtraGap; // if spawned object has optional extra info, get extra gap
+        }
+
         // Place object certain distance above last spawned object
-        float spawnHeight = lastSpawnY + DistanceBetweenSpawnedObjects;
+        float spawnHeight = lastSpawnY + DistanceBetweenSpawnedObjects + extraGap + lastObjectExtraDistance;
+        lastObjectExtraDistance = extraGap;
+        extraGap = 0f; // zero extra gap for next spawn. its not needed anymore
         objectToSpawn.Key.GetComponent<Transform>().localPosition = new Vector3(
             0f,
             spawnHeight,
