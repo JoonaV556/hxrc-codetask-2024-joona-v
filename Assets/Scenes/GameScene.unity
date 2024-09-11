@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc874137602389148ae90c40bbe3579a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RemoveBelowPlayerDistanceTreshold: 20
+  RemoveBelowPlayerDistanceTreshold: 50
   PlayerTransform: {fileID: 698958932}
 --- !u!1 &151207173
 GameObject:
