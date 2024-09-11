@@ -9,31 +9,33 @@ using static ColorDataBase;
 public class ColorGroupController : MonoBehaviour
 {
     /*
-        Each time player changes color by consuming color switcher,
-        this component ensures atleast one child sprite has player color assigned to it so player cannot get stuck
+        Each time player changes color by consuming color switcher, or new obstacle spawns,
+        this component ensures atleast one the obstacles child sprite has player color assigned to it
     */
 
     List<ColorAgent> Agents;
 
-    private void Awake()
-    {
-        PlayerColorAgent.OnPlayerColorSwitched += OnPlayerColorSwitched; // Randomize color at start
-    }
-
     private void OnEnable()
     {
+        PlayerColorAgent.OnPlayerColorSwitched += AssignColorsToChilds;
         // Get agents in children
         Agents = GetComponentsInChildren<ColorAgent>().ToList();
     }
 
     private void OnDisable()
     {
-        PlayerColorAgent.OnPlayerColorSwitched -= OnPlayerColorSwitched;
+        PlayerColorAgent.OnPlayerColorSwitched -= AssignColorsToChilds;
     }
 
-    void OnPlayerColorSwitched(ColorKey playerKey)
+    private void Start()
     {
-        int colorIndex = (int)playerKey;
+        // Assign child colors when obstacle spawns
+        AssignColorsToChilds(PlayerColorAgent.GetPlayerColor());
+    }
+
+    void AssignColorsToChilds(ColorKey playerColor)
+    {
+        int colorIndex = (int)playerColor;
         // Set colors for all childs, first child gets players color
         for (int i = 0; i < Agents.Count; i++)
         {

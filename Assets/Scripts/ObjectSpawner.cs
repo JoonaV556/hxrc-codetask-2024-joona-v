@@ -223,7 +223,6 @@ public class ObjectSpawner : MonoBehaviour
         if (lastSpawnedType == SpawnableType.ColorChanger)
         {
             possibleTypes.Remove(2); // Remove color changer
-            Debug.Log("prevented color changer");
         }
 
         // Prevent 3 obstacles in row
@@ -238,7 +237,6 @@ public class ObjectSpawner : MonoBehaviour
         {
             types += type.ToString();
         }
-        Debug.Log(types);
         return (SpawnableType)GetRandomInt(possibleTypes);
     }
 

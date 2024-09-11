@@ -5,6 +5,10 @@ public class PlayerColorAgent : ColorAgent
 {
     public static PlayerColorAgent instance; // singleton is required so obstacles can easily fetch player color when they are spawned, and use it to randomize child component colors
     public static Action OnCollidedWithWrongColorEvent;
+    /// <summary>
+    /// fired when player color is set or re-rolled.
+    /// ColorKey is for players new color.
+    /// </summary>
     public static Action<ColorDataBase.ColorKey> OnPlayerColorSwitched;
 
     private void Awake()
@@ -22,6 +26,9 @@ public class PlayerColorAgent : ColorAgent
         }
     }
 
+    /// <summary>
+    /// Returns players current color
+    /// </summary>
     public static ColorDataBase.ColorKey GetPlayerColor()
     {
         return instance.Color;
