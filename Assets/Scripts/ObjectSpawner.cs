@@ -223,6 +223,7 @@ public class ObjectSpawner : MonoBehaviour
         if (lastSpawnedType == SpawnableType.ColorChanger)
         {
             possibleTypes.Remove(2); // Remove color changer
+            Debug.Log("prevented color changer");
         }
 
         // Prevent 3 obstacles in row
@@ -232,6 +233,12 @@ public class ObjectSpawner : MonoBehaviour
         }
 
         // return random type after unwanted types have been excluded
+        string types = "possible types: ";
+        foreach (var type in possibleTypes)
+        {
+            types += type.ToString();
+        }
+        Debug.Log(types);
         return (SpawnableType)GetRandomInt(possibleTypes);
     }
 
@@ -246,7 +253,7 @@ public class ObjectSpawner : MonoBehaviour
         {
             return list[0];
         }
-        int random = UnityEngine.Random.Range(0, list.Count() - 1);
+        int random = UnityEngine.Random.Range(0, list.Count());
         return list[random];
     }
 
